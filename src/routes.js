@@ -20,6 +20,6 @@ routes.delete('/students/:id', StudentController.delete)
 routes.get('/plans', PlanController.index)
 routes.post('/plans', PlanController.store)
 routes.put('/plans/:id', PlanController.update)
-routes.delete('plans/:id', PlanController.delete)
+routes.delete('/plans/:id', PlanController.delete)
 
 export default routes
