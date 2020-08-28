@@ -14,6 +14,7 @@ Criação da primeira parte do desafio proposto pelo Bootcamp GoStack 9.0, ofere
 * PostgreSQL
 * JWT (JsonWebTokens)
 * YUP (Validations)
+* Date-fns
 
 ### Sobre
 
