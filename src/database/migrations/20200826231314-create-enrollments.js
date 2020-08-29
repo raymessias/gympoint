@@ -15,7 +15,8 @@ module.exports = {
         references: { model: 'students', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: false,        
+        allowNull: false,
+        unique: true,        
       },
       plan_id: {
         type: Sequelize.INTEGER,
@@ -33,7 +34,7 @@ module.exports = {
         allowNull: false,
       },
       price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10,2),
         allowNull: false,
       },
       created_at: {
