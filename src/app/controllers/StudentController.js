@@ -1,4 +1,5 @@
 import Student from '../models/Student'
+import Queue from '../lib/Queue'
 
 class StudentController {
   async index(req, res) {
@@ -19,6 +20,9 @@ class StudentController {
     }
 
     const student = await Student.create({ name, email, age, weight, height })
+
+    // Add job RegistrationMail na fila 
+    await Queue.add('RegistrationMail', { student })
 
     return res.status(200).json(student)
   }
