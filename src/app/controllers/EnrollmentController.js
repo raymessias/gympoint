@@ -1,6 +1,8 @@
-import { parseISO, addMonths } from 'date-fns'
+import { parseISO, addMonths, format } from 'date-fns'
+import Queue from '../lib/Queue'
 import { Op } from 'sequelize'
 import * as yup from 'yup'
+
 import Enrollment from '../models/Enrollment'
 import Student from '../models/Student'
 import Plan from '../models/Plan'
@@ -57,7 +59,6 @@ class EnrollmentController {
 
     const { duration, price: priceMonth } = plan
 
-
     const end_date = addMonths(parseISO(start_date), duration)
 
     const price = Math.floor(duration * priceMonth)
@@ -69,6 +70,17 @@ class EnrollmentController {
       end_date,
       price
     })
+
+    const enrollMail = {
+      name: student.name,
+      email: student.email,
+      plan: plan.title,
+      priceMonth,
+      end_date: format(end_date, 'dd/MM/yyyy'),
+      price,
+    }
+
+    await Queue.add('EnrollmentMail', { enrollMail })
 
     return res.status(200).json(enroll)
   }

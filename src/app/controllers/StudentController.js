@@ -37,7 +37,8 @@ class StudentController {
     }
 
     const { name, email, age, weight, height } = await student.update(req.body)
-
+    await student.save()
+    
     return res.status(200).json({
       id,
       name,
