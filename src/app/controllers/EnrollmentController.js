@@ -143,7 +143,22 @@ class EnrollmentController {
 
   }
 
-  async delete() { }
+  async delete(req, res) {
+    const { id } = req.params
+    const enroll = await Enrollment.findByPk(id)
+
+
+    if (!enroll) {
+      return res.status(400).json({ error: 'Enrollment not found' })
+    }
+
+    await Enrollment.destroy({ where: { id } })
+
+    return res.status(200).json({
+      id,
+      message:'Enrollment deleted succesfully'
+    })
+  }
 }
 
 
